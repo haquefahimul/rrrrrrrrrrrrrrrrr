@@ -1,0 +1,285 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Russify — Editorial Constructivist */
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+@theme inline {
+  --font-display: "Unbounded", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-signal: var(--signal);
+  --color-gold: var(--gold);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* Constructivist palette */
+  --cream: oklch(0.962 0.018 85);
+  --ink: oklch(0.16 0.012 270);
+  --signal: oklch(0.605 0.215 27);   /* signal red */
+  --gold: oklch(0.78 0.14 80);
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: oklch(0.985 0.01 85);
+  --card-foreground: var(--ink);
+  --popover: oklch(0.985 0.01 85);
+  --popover-foreground: var(--ink);
+  --primary: var(--signal);
+  --primary-foreground: var(--cream);
+  --secondary: var(--ink);
+  --secondary-foreground: var(--cream);
+  --muted: oklch(0.92 0.012 85);
+  --muted-foreground: oklch(0.42 0.014 270);
+  --accent: var(--gold);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: var(--cream);
+  --border: oklch(0.16 0.012 270 / 0.18);
+  --input: oklch(0.16 0.012 270 / 0.14);
+  --ring: var(--signal);
+}
+
+.dark {
+  --background: oklch(0.13 0.012 270);
+  --foreground: oklch(0.96 0.018 85);
+  --card: oklch(0.18 0.014 270);
+  --card-foreground: oklch(0.96 0.018 85);
+  --popover: oklch(0.18 0.014 270);
+  --popover-foreground: oklch(0.96 0.018 85);
+  --primary: oklch(0.66 0.22 27);
+  --primary-foreground: oklch(0.13 0.012 270);
+  --secondary: oklch(0.96 0.018 85);
+  --secondary-foreground: oklch(0.13 0.012 270);
+  --muted: oklch(0.22 0.014 270);
+  --muted-foreground: oklch(0.72 0.018 85);
+  --accent: oklch(0.78 0.14 80);
+  --accent-foreground: oklch(0.13 0.012 270);
+  --border: oklch(0.96 0.018 85 / 0.14);
+  --input: oklch(0.96 0.018 85 / 0.14);
+  --ring: oklch(0.66 0.22 27);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  ::selection { background: var(--color-signal); color: var(--color-cream); }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-mono { font-family: var(--font-mono); }
+  .text-balance { text-wrap: balance; }
+  .border-ink { border-color: var(--color-ink); }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--ink) 6%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--ink) 6%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .dark .grid-bg {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--foreground) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 7%, transparent) 1px, transparent 1px);
+  }
+
+  .brutal-shadow { box-shadow: 6px 6px 0 0 var(--color-ink); }
+  .brutal-shadow-sm { box-shadow: 3px 3px 0 0 var(--color-ink); }
+  .dark .brutal-shadow { box-shadow: 6px 6px 0 0 var(--color-signal); }
+  .dark .brutal-shadow-sm { box-shadow: 3px 3px 0 0 var(--color-signal); }
+
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee { animation: marquee 40s linear infinite; }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(12deg); }
+    50% { transform: translateY(-12px) rotate(14deg); }
+  }
+  .animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+
+  @keyframes spin-slow {
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow { animation: spin-slow 28s linear infinite; }
+
+  @keyframes aurora-blob {
+    0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: .55; }
+    50%      { transform: translate3d(40px,-30px,0) scale(1.15); opacity: .85; }
+  }
+  .aurora-blob { animation: aurora-blob 14s ease-in-out infinite; }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in { animation: fade-in 0.35s ease-out both; }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .text-shimmer {
+    background: linear-gradient(90deg, var(--color-foreground) 0%, var(--color-signal) 50%, var(--color-foreground) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* Reusable hover lift */
+  .lift { transition: transform 250ms cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 250ms ease; }
+  .lift:hover { transform: translateY(-3px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee, .animate-float-slow, .animate-spin-slow, .text-shimmer, .aurora-blob, .animate-fade-in {
+      animation: none !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* User-toggled reduced motion */
+  .reduce-motion *,
+  .reduce-motion *::before,
+  .reduce-motion *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Global focus-visible ring for keyboard users */
+  :where(a, button, [role="button"], [role="menuitem"], input, select, textarea, summary):focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Skip link */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    background: var(--color-signal);
+    color: var(--color-cream);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+  }
+  .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+  }
+}
+
+/* ============== Starfield background (lightweight, CSS-only) ============== */
+.starfield {
+  background:
+    radial-gradient(ellipse at 20% 10%, color-mix(in oklab, var(--color-signal) 8%, transparent) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 90%, color-mix(in oklab, #6366f1 10%, transparent) 0%, transparent 60%);
+}
+.starfield-layer {
+  position: absolute;
+  inset: -50%;
+  background-repeat: repeat;
+  opacity: 0.55;
+  will-change: transform;
+}
+.starfield-layer-1 {
+  background-image:
+    radial-gradient(1px 1px at 25px 30px, rgba(255,255,255,.9), transparent 50%),
+    radial-gradient(1px 1px at 80px 120px, rgba(255,255,255,.7), transparent 50%),
+    radial-gradient(1.5px 1.5px at 160px 60px, rgba(255,255,255,.85), transparent 50%),
+    radial-gradient(1px 1px at 220px 200px, rgba(255,255,255,.6), transparent 50%);
+  background-size: 260px 260px;
+  animation: starfield-drift 180s linear infinite;
+}
+.starfield-layer-2 {
+  background-image:
+    radial-gradient(1px 1px at 40px 80px, rgba(255,200,180,.8), transparent 50%),
+    radial-gradient(1.5px 1.5px at 200px 40px, rgba(180,200,255,.8), transparent 50%),
+    radial-gradient(1px 1px at 300px 250px, rgba(255,255,255,.6), transparent 50%);
+  background-size: 380px 380px;
+  animation: starfield-drift 260s linear infinite reverse;
+  opacity: 0.4;
+}
+.starfield-layer-3 {
+  background-image:
+    radial-gradient(2px 2px at 100px 100px, rgba(220,38,38,.55), transparent 50%),
+    radial-gradient(1.5px 1.5px at 400px 300px, rgba(255,255,255,.7), transparent 50%);
+  background-size: 520px 520px;
+  animation: starfield-twinkle 6s ease-in-out infinite alternate;
+  opacity: 0.35;
+}
+.starfield-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, color-mix(in oklab, var(--color-signal) 6%, transparent), transparent 60%);
+}
+@keyframes starfield-drift {
+  from { transform: translate3d(0,0,0); }
+  to   { transform: translate3d(-260px,-260px,0); }
+}
+@keyframes starfield-twinkle {
+  from { opacity: 0.2; }
+  to   { opacity: 0.55; }
+}
+:root.light .starfield-layer-1,
+:root.light .starfield-layer-2,
+:root.light .starfield-layer-3 { opacity: 0.18; filter: invert(1) hue-rotate(180deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .starfield-layer { animation: none !important; }
+}
+.reduce-motion .starfield-layer { animation: none !important; }
